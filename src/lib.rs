@@ -48,6 +48,15 @@ pub fn make_sample(stream: &mut dyn Write, split: &str, column: usize, row: usiz
         // push to buffer
         buffer = buffer + &tmp;
     }
+    
+    if !buffer.is_empty() {
+        match buf_writer.write_all(buffer.as_bytes()) {
+            Ok(_) => {},
+            Err(e) => {
+                panic!("{}", e)
+            }
+        }
+    }
 }
 
 #[cfg(test)]
